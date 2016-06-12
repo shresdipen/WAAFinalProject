@@ -13,7 +13,7 @@
     </head>
     <body>
         <form action="uploader.spring" method="post" enctype="multipart/form-data">
-            Select images: <input type="file" name="uploadedFiles" accept="image/*"/>
+            Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
             <input type="submit" value="Upload" />
         </form>
         ${name}
