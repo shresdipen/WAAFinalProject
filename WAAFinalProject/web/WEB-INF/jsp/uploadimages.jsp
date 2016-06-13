@@ -16,5 +16,6 @@
             Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
             <input type="submit" value="Upload" />
         </form>
+        ${name}
     </body>
 </html>
