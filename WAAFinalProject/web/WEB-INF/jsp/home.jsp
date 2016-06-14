@@ -17,7 +17,7 @@
         <form action="uploader.spring" method="post" enctype="multipart/form-data">
             Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
             <br/>
-            Comment: <textarea name="comment" name="comment"> </textarea>
+            Comment: <textarea name="comment" > </textarea>
             
             <br/>
             <input type="submit" value="Upload" />
@@ -31,7 +31,7 @@
             </form>
             <c:forEach items="${post.imageName}" var="image" >
                 <c:if test="${image != 'uploadedFolder/'}">
-                    <img src="${image}" alt="Picture" style="border: black solid thick;" width="200px" height="200px"/>                
+                    <!--<img src="${image}" alt="Picture" style="border: black solid thick;" width="200px" height="200px"/>-->                
                 </c:if>
 
             </c:forEach>
