@@ -6,6 +6,7 @@
 package edu.mum.waa545.project.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,10 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller()
 public class TestController {
-    @RequestMapping(value = "/test.spring", method = RequestMethod.POST)
+    
     public String handleRequestInternal() throws Exception {
         
         System.out.println("Here.............");
-        return ("index");
+        return ("uploadimages");
+    }
+    @RequestMapping("/uploadimages")
+    public String sayHello(Model model){
+    
+        model.addAttribute("name", "Beeminet");
+        
+        return "uploadimages";
     }
 }

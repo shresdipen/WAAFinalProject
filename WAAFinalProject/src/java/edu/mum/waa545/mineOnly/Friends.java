@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.mum.waa545.project.domain;
+package edu.mum.waa545.mineOnly;
 
+import edu.mum.waa545.project.model.RegisteredUser;
+import edu.mum.waa545.project.model.User;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,20 +24,20 @@ public class Friends {
 
     public Friends() {
 
-        RegisteredUser reg1 = new RegisteredUser();
-
-        List<User> u1s = Arrays.asList(new User("sele", 12), new User("shebe", 12));
-        reg1.setFriends(u1s);
-        reg1.setUser(new User("kebede", 12));
-
-        RegisteredUser reg2 = new RegisteredUser();
-        
-        List<User> u2s = Arrays.asList(new User("kbc", 12), new User("fbc", 12));
-        reg2.setFriends(u2s);
-        reg2.setUser(new User("helen", 20));
-        
-        friends.add(reg1);
-        friends.add(reg2);
+//        RegisteredUser reg1 = new RegisteredUser();
+//
+////        List<User> u1s = Arrays.asList(new User("sele", 12), new User("shebe", 12));
+////        reg1.setFriends(u1s);
+////        reg1.setUser(new User("kebede", 12));
+////
+////        RegisteredUser reg2 = new RegisteredUser();
+////        
+////        List<User> u2s = Arrays.asList(new User("kbc", 12), new User("fbc", 12));
+////        reg2.setFriends(u2s);
+////        reg2.setUser(new User("helen", 20));
+//        
+//        friends.add(reg1);
+//        friends.add(reg2);
 
     }
 
@@ -49,10 +51,8 @@ public class Friends {
 
     public List<User> getFrindsOnly(String userName) {
 
-        //List<User> friendList = new ArrayList<>();
-
         for (RegisteredUser reg : friends) {
-            if (reg.getUser().getUserName().equals(userName)) {
+            if (reg.getUser().getUsername().equals(userName)) {
                 return reg.getFriends();
             }
         }
