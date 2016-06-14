@@ -17,6 +17,8 @@ public interface PostService {
  
     public List<Post> getPosts();
     
+    public List<Post> getUserPosts();
+    
     public void addPost(List<String> images, Map<String, String[]> param);
     
     public void addChildrenPost(String parentPostId, String comment);
