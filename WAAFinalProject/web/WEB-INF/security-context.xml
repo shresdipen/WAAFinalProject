@@ -35,5 +35,5 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
         
-        <context:component-scan base-package="edu.mum.waa545.project" />
+        <context:component-scan base-package="edu.mum.waa545.project" />         
 </beans>

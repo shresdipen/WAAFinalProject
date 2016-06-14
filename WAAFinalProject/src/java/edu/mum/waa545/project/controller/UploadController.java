@@ -26,9 +26,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller()
 public class UploadController {
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView getWelcomePage(HttpServletRequest request) {
+        return new ModelAndView("index");
+    }
+    
     @RequestMapping(value = "uploader.spring", method = RequestMethod.POST)
     public ModelAndView upload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] uploadedFiles) throws IOException {
         List<String> images = new ArrayList<>();
+        System.out.println("CCCCCCCHHHHHHHHHHHHH");
         for (CommonsMultipartFile uploadFile : uploadedFiles) {
             String fullPath = request.getServletContext().getRealPath("redirect.jsp");
             fullPath = fullPath.substring(0, fullPath.length() - 12) + "/uploadedFolder/";
