@@ -5,10 +5,13 @@
  */
 package edu.mum.waa545.project.controller;
 
-import edu.mum.waa545.project.service.PostService;
+import edu.mum.waa545.project.serviceimpl.PostServiceImpl;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,13 +28,15 @@ public class UploadController {
 
     @RequestMapping(value = "uploader.spring", method = RequestMethod.POST)
     public ModelAndView upload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] uploadedFiles) throws IOException {
-
+        
+        List<String> images = new ArrayList<>();
         for (CommonsMultipartFile uploadFile : uploadedFiles) {
             String fullPath = request.getServletContext().getRealPath("redirect.jsp");
             fullPath = fullPath.substring(0,fullPath.length()-12)+"/uploadedFolder/";
-            System.out.println("Location: "+fullPath);
             uploadFile.transferTo(new File(fullPath+uploadFile.getOriginalFilename()));
+            images.add("uploadedFolder/"+uploadFile.getOriginalFilename());
         }
+        postService.addPost(images, request.getParameterMap());
         return new ModelAndView("index");
     }
 
@@ -41,9 +46,12 @@ public class UploadController {
         return new ModelAndView("uploadimages");
     }
     
+    @Autowired
+    PostServiceImpl postService;
     @RequestMapping(value = "home.spring", method = RequestMethod.GET)
     public ModelAndView getHomePage(HttpServletRequest request) {
-        request.setAttribute("posts", new PostService().getPosts());
+        request.setAttribute("posts", postService.getPosts());
+        System.out.println("Posts::::: "+postService.getPosts());
         return new ModelAndView("home");
     }
 }

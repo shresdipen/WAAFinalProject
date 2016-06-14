@@ -17,7 +17,11 @@
         <c:forEach items="${posts}" var="post">
             <c:forEach items="${post.imageName}" var="image" >
                 <img src="${image}" alt="Picture" style="border: black solid thick;" width="200px" height="200px"/>
+                
             </c:forEach>
+            <br/>
+            Comment: ${post.comment}
+            <hr/>
             
         </c:forEach>
     </body>

@@ -14,6 +14,11 @@
     <body>
         <form action="uploader.spring" method="post" enctype="multipart/form-data">
             Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
+            <br/>
+            Comment: <input type="text" name="comment" /> 
+            <!--<textarea name="comment" > </textarea>-->
+            
+            <br/>
             <input type="submit" value="Upload" />
         </form>
         ${name}
