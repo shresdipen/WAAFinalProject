@@ -22,6 +22,8 @@
             <br/>
             <input type="submit" value="Upload" />
         </form>
+        
+        <hr/><hr/>
         <c:forEach items="${posts}" var="post">
             <form action="removePost.spring" method="post">
                 <input type="hidden" name="postId" value="${post.postId}"/>
