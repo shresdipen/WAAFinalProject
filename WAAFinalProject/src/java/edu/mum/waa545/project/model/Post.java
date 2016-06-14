@@ -94,6 +94,10 @@ public class Post {
         }
         return true;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Post{" + "userName=" + userName + ", imageName=" + imageName + ", comment=" + comment + ", postId=" + postId + ", childrenPost=" + childrenPost + '}';
+    }    
     
 }

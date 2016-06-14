@@ -13,7 +13,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        welcome
-        ${tt}
+        Welcome ${user.firstname} ${user.lastname},
+        
+        <br />
+        ${user.age}
+        <br />
+        ${user.address.college}, ${user.address.country}
+        
+        <br />
+        <a href="logout.rajeev">Logout</a>
     </body>
 </html>

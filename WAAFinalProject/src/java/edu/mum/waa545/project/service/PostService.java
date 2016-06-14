@@ -5,18 +5,23 @@
  */
 package edu.mum.waa545.project.service;
 
-import edu.mum.waa545.project.db.PostDB;
 import edu.mum.waa545.project.model.Post;
 import java.util.List;
-import org.springframework.stereotype.Service;
+import java.util.Map;
 
 /**
  *
  * @author dipen
  */
-@Service
-public class PostService {
-    public List<Post> getPosts(){
-        return PostDB.getAllPost();
-    }
+public interface PostService {
+ 
+    public List<Post> getPosts();
+    
+    public void addPost(List<String> images, Map<String, String[]> param);
+    
+    public void addChildrenPost(String parentPostId, String comment);
+    
+    public void removeChildrenPost(String parentPostId, String childPostId);
+    
+    public void removePost(String postId);
 }
