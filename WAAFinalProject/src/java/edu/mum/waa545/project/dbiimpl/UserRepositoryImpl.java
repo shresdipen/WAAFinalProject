@@ -63,7 +63,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User findUserByName(String username) {
         for (User user : ourusers) {
-        if (user.getUsername() == username) {
+        if (user.getUsername().equals(username)) {
             return user;
         }
         }
