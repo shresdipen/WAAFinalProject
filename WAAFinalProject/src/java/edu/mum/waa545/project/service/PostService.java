@@ -18,4 +18,10 @@ public interface PostService {
     public List<Post> getPosts();
     
     public void addPost(List<String> images, Map<String, String[]> param);
+    
+    public void addChildrenPost(String parentPostId, String comment);
+    
+    public void removeChildrenPost(String parentPostId, String childPostId);
+    
+    public void removePost(String postId);
 }
