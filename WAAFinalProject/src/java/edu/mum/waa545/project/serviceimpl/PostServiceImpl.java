@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +35,8 @@ public class PostServiceImpl implements PostService{
         String comment = param.get("comment")[0];
         if(postDB==null) postDB = new PostDB();
         String postId = postDB.getPosts().size()==0 ? "1" : String.valueOf(Integer.parseInt(postDB.getPosts().get(postDB.getPosts().size()-1).getPostId())+1);
-        Post post = new Post("dipen", images, comment, postId, new ArrayList<>());
+        String user =  (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post post = new Post(user, images, comment, postId, new ArrayList<>());
         postDB.addPost(post);
         System.out.println("Posts: "+postDB.getPosts());
     }
@@ -49,7 +51,8 @@ public class PostServiceImpl implements PostService{
             }
         }
         String postId = parentPost.getChildrenPost().size()==0 ? "1" : String.valueOf(Integer.parseInt(parentPost.getChildrenPost().get(parentPost.getChildrenPost().size()-1).getPostId())+1);
-        Post childPost = new Post("", new ArrayList<>(), comment, postId, new ArrayList<>());
+        String user =  (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post childPost = new Post(user, new ArrayList<>(), comment, postId, new ArrayList<>());
         postDB.addChildPost(parentPost, childPost);        
     }
 
@@ -64,6 +67,12 @@ public class PostServiceImpl implements PostService{
     public void removePost(String postId) {
         Post post = postDB.getPostFromId(postId);
         postDB.removePost(post);
+    }
+
+    @Override
+    public List<Post> getUserPosts() {
+         String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         return postDB.getUserPost(user);
     }
     
     
