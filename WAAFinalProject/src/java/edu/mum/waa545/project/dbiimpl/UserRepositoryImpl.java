@@ -60,9 +60,15 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findUserByName(String username) {
         for (User user : ourusers) {
+<<<<<<< HEAD
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
+=======
+        if (user.getUsername().equals(username)) {
+            return user;
+        }
+>>>>>>> 3bc036f28dc9fa0f2b6cc7e82b8853a959ba96f8
         }
         return null; 
         }
