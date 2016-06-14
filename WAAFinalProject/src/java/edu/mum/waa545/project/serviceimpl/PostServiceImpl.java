@@ -30,11 +30,23 @@ public class PostServiceImpl implements PostService{
     
     public void addPost(List<String> images, Map<String, String[]> param){
         String comment = param.get("comment")[0];
-        System.out.println("Comment: "+comment);
-        Post post = new Post("", images, comment, "", new ArrayList<>());
-        System.out.println("PostDB: "+postDB);
         if(postDB==null) postDB = new PostDB();
+        
+        Post post = new Post("dipen", images, comment, ""+postDB.getPosts().size(), new ArrayList<>());
         postDB.addPost(post);
         System.out.println("Posts: "+postDB.getPosts());
+    }
+
+    @Override
+    public void addChildrenPost(String parentPostId, String comment) {
+        Post parentPost = new Post();
+        for(Post post : postDB.getPosts()){
+            if(post.getPostId().equals(parentPostId)){
+                parentPost = post;
+                break;
+            }
+        }
+        Post childPost = new Post("", new ArrayList<>(), comment, "" + parentPost.getChildrenPost().size(), new ArrayList<>());
+        postDB.addChildPost(parentPost, childPost);        
     }
 }

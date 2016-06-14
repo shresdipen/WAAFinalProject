@@ -33,7 +33,10 @@ public class UploadController {
         for (CommonsMultipartFile uploadFile : uploadedFiles) {
             String fullPath = request.getServletContext().getRealPath("redirect.jsp");
             fullPath = fullPath.substring(0,fullPath.length()-12)+"/uploadedFolder/";
-            uploadFile.transferTo(new File(fullPath+uploadFile.getOriginalFilename()));
+            if(uploadFile.getOriginalFilename()!=null && !uploadFile.getOriginalFilename().isEmpty()){
+                uploadFile.transferTo(new File(fullPath+uploadFile.getOriginalFilename()));
+            }
+            
             images.add("uploadedFolder/"+uploadFile.getOriginalFilename());
         }
         postService.addPost(images, request.getParameterMap());
@@ -52,6 +55,15 @@ public class UploadController {
     public ModelAndView getHomePage(HttpServletRequest request) {
         request.setAttribute("posts", postService.getPosts());
         System.out.println("Posts::::: "+postService.getPosts());
+        return new ModelAndView("home");
+    }
+    
+    @RequestMapping(value = "addChildren.spring", method = RequestMethod.POST)
+    public ModelAndView addChildrenPost(HttpServletRequest request) {
+        String parentPostId = request.getParameter("parentPostId");
+        String childComment = request.getParameter("childComment");
+        postService.addChildrenPost(parentPostId, childComment);
+        request.setAttribute("posts", postService.getPosts());
         return new ModelAndView("home");
     }
 }

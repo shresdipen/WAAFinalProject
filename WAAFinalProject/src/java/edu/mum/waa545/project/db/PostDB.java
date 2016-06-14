@@ -8,7 +8,6 @@ package edu.mum.waa545.project.db;
 import edu.mum.waa545.project.model.Post;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,20 +18,6 @@ import org.springframework.stereotype.Repository;
 //@Scope(value="application")
 public class PostDB {
     private List<Post> posts = new ArrayList<>();
-    public static List<Post> getAllPost(){
-        List<Post> posts = new ArrayList<>();
-        List<Post> childPost = new ArrayList<>();
-        List<String> pics = new ArrayList<>();
-        pics.add("uploadedFolder/aceinst.png");
-        pics.add("uploadedFolder/fee payment.jpg");
-        pics.add("uploadedFolder/green-background-design-backgrounds-28569.jpg");
-        pics.add("uploadedFolder/green-background-images-6.jpg");
-        pics.add("uploadedFolder/mainpage.jpg");
-        pics.add("uploadedFolder/Wallpaper-HD-Audi-free.jpg");
-        posts.add(new Post("dipen", pics, "This is a comment.", "1", childPost));
-        
-        return posts;        
-    }
 
     public List<Post> getPosts() {
         return posts;
@@ -46,8 +31,11 @@ public class PostDB {
     }    
     
     public void addPost(Post post){
-        System.out.println("POsts: "+this.posts);
-        System.out.println("Post: "+post);
         this.posts.add(post);
+    }
+    
+    public void addChildPost(Post parentPost, Post childPost){
+        parentPost.getChildrenPost().add(childPost);
+        posts.set(posts.indexOf(parentPost), parentPost);
     }
 }
