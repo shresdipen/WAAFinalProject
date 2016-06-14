@@ -38,4 +38,35 @@ public class PostDB {
         parentPost.getChildrenPost().add(childPost);
         posts.set(posts.indexOf(parentPost), parentPost);
     }
+    
+    public Post getPostFromId(String postId){
+        Post result = new Post();
+        for(Post post : getPosts()){
+            if(post.getPostId().equals(postId)){
+                result = post;
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public Post getChildPostFromParentAndId(Post parentPost, String childPostId){
+        Post result = new Post();
+        for(Post post : parentPost.getChildrenPost()){
+            if(post.getPostId().equals(childPostId)){
+                result = post;
+                break;
+            }
+        }
+        return result;
+    }
+    
+    public void removeChildPost(Post parentPost, Post childPost){
+        parentPost.getChildrenPost().remove(childPost);
+        posts.set(posts.indexOf(parentPost), parentPost);
+    }
+    
+    public void removePost(Post post){
+        posts.remove(post);
+    }
 }
