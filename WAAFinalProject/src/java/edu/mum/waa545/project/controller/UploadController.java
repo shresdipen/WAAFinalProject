@@ -67,7 +67,23 @@ public class UploadController {
     FriendService friendsA;
     @RequestMapping(value = "home.spring", method = RequestMethod.GET)
     public ModelAndView getHomePage(HttpServletRequest request, Model model) {
-        List<Post> posts = new ArrayList<>(); 
+        
+        System.out.println("TThis is called..........");
+        System.out.println("Request: "+request.getParameter("name"));
+        String username =request.getParameter("username");
+                String firstname =request.getParameter("firstname");
+                        String lastname = request.getParameter("lastname");
+                
+//          System.out.println("Request: "+request.getParameter("username"));
+//          System.out.println("Request: "+request.getParameter("firstname"));
+//          System.out.println("Request: "+request.getParameter("lastname"));
+
+            request.setAttribute("username", username);
+          request.setAttribute("firstname", firstname);
+          request.setAttribute("lastname",lastname);
+
+          
+          List<Post> posts = new ArrayList<>(); 
         posts.addAll(postService.getUserPosts());
         String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<User> friends = friendService.getFriendsOnly(userName);

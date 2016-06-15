@@ -149,17 +149,19 @@
                         List of searched users:
         <hr/>
         <div>
-            <form action="users.jsp" method="POST">
-               <input type="text" name="username" required="Wrong username" />
+            <form action="searchpeople.spring" method="POST">
+               <input type="text" name="names" required="Wrong username" />
+               <input type="hidden" value="${user.username}" name="regUser"/>
                <input type="submit" name="submit" value="Search"/>
             </form>
+            
+            Username: ${username}
+            Firstname: ${firstname}
+            Lastname: ${lastname}
         </div>
         <hr/>                 
                     </div>
-                    
-                    
-                    
-                    
+
                     <div id="smallleftbox"class="well">
                         <p></p>
                         <a href="addEmployee.spring">report suspicion</a>
