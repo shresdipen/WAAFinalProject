@@ -19,13 +19,6 @@
                 }
                 document.getElementById("uploadPost").disabled = disable;
             };
-            function disableChildrenPost() {
-                disable = true;
-                if (document.getElementsByName("childComment")[0].value != "" ) {
-                    disable = false;
-                }
-                document.getElementById("addChildComment").disabled = disable;
-            };
         </script>
     </head>
     <body>
@@ -78,9 +71,9 @@
 
             <form action="addChildren.spring" method="post">
                 <input type="hidden" name="parentPostId" value="${post.postId}" />
-                Comment: <textarea name="childComment" onkeyup="disableChildrenPost()"></textarea>
+                Comment: <textarea name="childComment"></textarea>
 
-                <input type="submit" value="Comment" id="addChildComment" disabled="true"/>
+                <input type="submit" value="Comment"/>
             </form>
 
 
