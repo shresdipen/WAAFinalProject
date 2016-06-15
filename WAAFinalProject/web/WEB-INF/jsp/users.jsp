@@ -30,8 +30,8 @@
                     <div class="caption">
                         <form action="/WAAFinalProject/removeUser.spring" method="POST">
                             <input type="hidden" value="${freind.username}" name="oldFriend"/>
-                                <input type="hidden" value="${user.username}" name="delUser"/>
-                                <input type="hidden" value="${name}" name="name"/>
+                            <input type="hidden" value="${user.username}" name="delUser"/>
+                            <input type="hidden" value="${name}" name="name"/>
                             User Name: ${freind.username} <input type="submit" value="Remove"/><br/>
                             Last Name: ${freind.firstname}<br/>                   
                             First Name: ${freind.lastname}  
@@ -44,18 +44,24 @@
         List of searched users:
         <hr/>
         <div>
-            <c:forEach items="${users}" var="user">
-                <div class="col-sm-6 col-md-3" style="padding-bottom:
-                     15px">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            User Name: ${user.username}<br/>
-                            Last Name: ${user.firstname}<br/>                   
-                            First Name: ${user.lastname}                      
+            <form action="searchFriend.spring" method="POST">
+                <input type="text" name="firstName" placeholder="First Name"/> <input type  ="submit" value="Search"/>
+                <input type="hidden" value="${addfrined.username}" name="newFriend"/>
+                <input type="hidden" value="${user.username}" name="regUser"/>
+                <input type="hidden" value="${name}" name="name"/>
+                <c:forEach items="${searched}" var="user">
+                    <div class="col-sm-6 col-md-3" style="padding-bottom:
+                         15px">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                Searched User Name: ${user.username}<br/>
+                                Searched Last Name: ${user.firstname}<br/>                   
+                                Searched First Name: ${user.lastname}                      
+                            </div>
                         </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </form>
         </div>
         <hr/>
         List of Suggested Friends: 

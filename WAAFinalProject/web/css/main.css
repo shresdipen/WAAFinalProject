@@ -13,7 +13,7 @@
     
     /*border:1px #CCC solid;*/
     padding:3px;
-    padding-left: 780px;
+    padding-left: 870px;
     padding-top: 60px;
     /*background-color:#E9E9E9 ;*/
     border-radius: 6px;
@@ -22,7 +22,7 @@
 }
 
 input {
-    background: #E1FFE1;
+    background: white;
     border:1px #CCC solid;
     padding:6px;
 }
@@ -108,7 +108,7 @@ input {
     float: right;
     z-index: 2;
     border-radius: 25px;
-     box-shadow: 1px 1px 5px 5px lightblue;
+     /*box-shadow: 1px 1px 5px 5px lightblue;*/
 }
 #header6{
    
@@ -126,7 +126,7 @@ input {
 .loginone{
     display: inline;
 
-    margin-left: 110px;
+    margin-left: 8px;
 }
 .loginone .loginA{
     display: inline;
@@ -139,7 +139,7 @@ input {
 .loginTwo{
     display: block;
     /*float: right;*/
-    margin-left: 100px;
+    /*margin-left: 100px;*/
 }
 .loginTwo .loginB{
     display: inline;

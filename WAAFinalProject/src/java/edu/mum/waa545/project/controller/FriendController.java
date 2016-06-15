@@ -58,7 +58,7 @@ public class FriendController extends AbstractController {
         regUser.removeFriend(user);
         request.setAttribute("friends", friends.getFriendsOnly(userName));
         request.setAttribute("suggested", friends.suggestFriends(userName));
-        request.setAttribute("users", friends.searchUsers(userName));
+        request.setAttribute("searched", friends.searchUsers(userName));
         request.setAttribute("name", regUser.getUser().getUsername());
         
         return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());
@@ -92,7 +92,24 @@ public class FriendController extends AbstractController {
         regUser.addFriend(user);
         request.setAttribute("friends", friends.getFriendsOnly(userName));
         request.setAttribute("suggested", friends.suggestFriends(userName));
-        request.setAttribute("users", friends.searchUsers(userName));
+        request.setAttribute("searched", friends.searchUsers(userName));
+        request.setAttribute("name", regUser.getUser().getUsername());
+        
+        return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());
+    }
+    
+    @RequestMapping(value = "/searchFriend.spring", method = RequestMethod.POST)
+    public ModelAndView searchFriend(HttpServletRequest request) {
+       // String newFriend = request.getParameter("newFriend");
+        String userName = request.getParameter("regUser");
+        String searchUser = request.getParameter("firstName");
+        RegisteredUser regUser = friends.getRegisteredUserByUserName(userName);
+        //User user = friends.getUserByUserName(newFriend);
+        //System.out.println("Frin add friend");
+        //regUser.addFriend(user);
+        request.setAttribute("friends", friends.getFriendsOnly(userName));
+        request.setAttribute("suggested", friends.suggestFriends(userName));
+        request.setAttribute("searched", friends.searchUsers(searchUser));
         request.setAttribute("name", regUser.getUser().getUsername());
         
         return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());

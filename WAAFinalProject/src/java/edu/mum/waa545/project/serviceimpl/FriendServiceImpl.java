@@ -127,7 +127,7 @@ public class FriendServiceImpl implements FriendService {
                 }
             }
         } else if (suggestedFriends.size() <= 5) {
-            suggested = suggestedFriends;
+            suggestedByState.addAll(suggestedFriends);
         }
 
         if (suggestedByState.size() > 5) {
@@ -140,6 +140,8 @@ public class FriendServiceImpl implements FriendService {
                     break;
                 }
             }
+        } else if (suggestedFriends.size() <= 5) {
+            suggested.addAll(suggestedByState);
         }
 
         return suggested;
@@ -150,7 +152,7 @@ public class FriendServiceImpl implements FriendService {
         List<User> userList = getAllUsers();
         List<User> friendsList = getFriendsOnly(userName);
         List<User> notFriends = new ArrayList<>();
-        notFriends = userList;
+        notFriends.addAll(userList);
         if (friendsList != null) {
             for (User friend : friendsList) {
 
