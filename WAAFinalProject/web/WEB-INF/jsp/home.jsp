@@ -11,16 +11,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script>
+            function disablePost() {
+                disable = true;
+                if (document.getElementsByName("uploadedFiles")[0].value != "" || document.getElementsByName("comment")[0].value != "") {
+                    disable = false;
+                }
+                document.getElementById("uploadPost").disabled = disable;
+            };
+            function disableChildrenPost() {
+                disable = true;
+                if (document.getElementsByName("childComment")[0].value != "" ) {
+                    disable = false;
+                }
+                document.getElementById("addChildComment").disabled = disable;
+            };
+        </script>
     </head>
     <body>
-        <h1>Welcome User</h1>
+        <h1>Welcome User${disable}</h1>
         <form action="uploader.spring" method="post" enctype="multipart/form-data">
-            Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
+            Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple="" onchange ="disablePost()"/>
             <br/>
-            Comment: <textarea name="comment" name="comment"> </textarea>
+            Comment: <textarea name="comment" onkeyup="disablePost()"> </textarea>
 
             <br/>
-            <input type="submit" value="Upload" />
+            <input type="submit" value="Upload" id="uploadPost" disabled="true"/>
         </form>
 
         <hr/><hr/>
@@ -62,9 +78,9 @@
 
             <form action="addChildren.spring" method="post">
                 <input type="hidden" name="parentPostId" value="${post.postId}" />
-                Comment: <textarea name="childComment"></textarea>
+                Comment: <textarea name="childComment" onkeyup="disableChildrenPost()"></textarea>
 
-                <input type="submit" value="Comment" />
+                <input type="submit" value="Comment" id="addChildComment" disabled="true"/>
             </form>
 
 
