@@ -12,48 +12,69 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../../css/main.css" rel="stylesheet" type="text/css"/>
         <title></title>
     </head>
     <body>
-
+        <div id="header1"></div>
+        <div id="header2"></div>
+        <div id="header3"></div>
+        <form class="form1"></form>
+        
         <h1>registration page</h1>
-        <form:form action="userRegister.spring" modelAttribute="user" method="POST" >
-            <fieldset>
-                <label>username</label>
-                <form:input path="username" />
-
-                <label for="password" class="">password</label>
-                <form:input type="password" path="password"/>
-
-                <label for="firstName" class="">First Name</label>
-                <form:input type="text" path="firstname" />
-
-                <label for="lastName" class="">Last Name</label>
-                <form:input type="text" path="lastname"/>
-
-                <label for="birthDay" class="">Birthday</label>
-                <form:input type="text" path="dateofbirth" />
-
-                <label for="gender" class="">Gender</label>
-                <form:input type="text" path="gender" />
-
-                <label for="country" class="">Country</label>
-                <form:input type="text" path="address.country" />
-
-                <label for="state" class="">State</label>
-                <form:input type="text" path="address.state" />
-
-                <label for="lastName" class="">High School</label>
-                <form:input type="text" path="address.highschool"/>
-
-                <label for="lastName" class="">College</label>
-                <form:input type="text" path="address.college"/>
-
-                <label for="citizenship" class="">Nationality</label>
-                <form:input type="text" path="address.nationality" />   
-
-                <button type="submit">Sign up</button>
-            </fieldset>
-        </form:form>
+<form action="userRegister.spring" modelAttribute="user" method="POST" >
+            <table border="2">
+                <tr>
+             <td><h4>username</h4> </td>
+             <td><input type="text" name="username" maxlength="15" minlength="5" required="true"/> </td>
+                 </tr><tr>
+            <td><h4>password</h4></td>
+            <td><input type="password" name="password" required="true"/></td>
+                </tr><tr>
+             <td><h4>First Name</h4> </td>
+             <td><input type="text" name="firstname" maxlength="20" minlength="5" required="true"/> </td>
+                </tr><tr>
+             <td><h4>Last Name</h4> </td>
+             <td><input type="text" name="lastname" maxlength="20" minlength="5" required="true"/> </td>
+                </tr><tr>
+             <td><h4>Age</h4> </td>
+             <td><input type="number" name="age" min="18" max="99" step="1" required="true"/> </td>
+                 </tr><tr>
+             <td><h4>Birthday</h4> </td>
+             <td><input type="date"  name="dateofbirth" required="true"/> </td>
+                 </tr><tr>      
+             <td><h4>Gender</h4> </td>
+             <td>Male<input type="radio" name="gender" value="Male" required="true" checked="true"/>
+            Female<input type="radio" name="gender" value="Female" required="true"/>
+            Other<input type="radio" name="gender" value="Other" required="true"/> </td>
+                </tr><tr>
+         <td><h4>Country of birth:</h4> </td>
+              <td><select name="country" required="true">
+        <c:forEach items="${country}" var="country">            
+            <option value="${country}">${country}</option>                    
+        </c:forEach>
+        </select> </td>
+                </tr><tr>
+             <td><h4>State</h4> </td>
+             <td><input type="text" name="state" required="true"/> </td>
+                </tr><tr>  
+             <td><h4>High School</h4> </td>
+             <td><input type="text" name="highschool" maxlength="15" minlength="3" required="true"/> <td>
+                </tr>  <tr>
+             <td><h4>College</h4> </td>
+             <td><input type="text" name="college" maxlength="15" minlength="3" required="true"/> </td>
+             </tr> <tr>
+            
+             <td><h4>Nationality:</h4> </td>
+              <td><select name="nationality" required="true">
+        <c:forEach items="${nationality}" var="nationality">            
+            <option value="${nationality}">${nationality}</option>                    
+        </c:forEach>
+            </select> </td>
+            
+            </tr>
+            </table>
+            <input type="submit" value="Sign up"/>   
+</form>
     </body>
 </html>

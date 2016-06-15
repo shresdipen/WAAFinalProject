@@ -20,16 +20,7 @@ public class UserServiceImpl implements UserService{
     private UserRepository userrepository;
     
     @Override
-    public void save(User user) {
-//        user.setUsername("username");
-//        user.setPassword("password");
-//        user.setFirstname("firstname");
-//        user.setLastname("lastname");
-//        user.setAge(0);
-//        user.setDateofbirth(new Date());
-//        user.setGender("gender");
-//        user.setAddress(new Address("country", "state", "highschool", "college", "nationality"));
-        
+    public void save(User user) {   
     userrepository.save(user);
 
     }
@@ -45,5 +36,19 @@ public class UserServiceImpl implements UserService{
     public List<User> getAllusers() {
     return userrepository.getAllusers();
     }
-  
+
+    @Override
+    public boolean checkDuplicate(String username) {
+    
+    User user = userrepository.findUserByName(username);
+    if(!(user==null)){
+    if(username.equalsIgnoreCase(user.getUsername()))
+        return true;
+    else 
+        return false;
+        }
+    else
+        return false;  
+    }
+ 
 }
