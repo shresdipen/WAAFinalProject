@@ -1,0 +1,215 @@
+
+body{
+    /*background-image: url("bg1.png");*/
+/*    background-color:rgb(0, 164, 215);*/
+}
+
+
+.login {
+
+    height:100px;
+    width:500px;
+    margin: auto;
+    font-family: "Arial Rounded MT Bold";
+    color: white;
+    /*border:1px #CCC solid;*/
+    padding:3px;
+    padding-left: 35px;
+    padding-top: 60px;
+    /*background-color:#E9E9E9 ;*/
+    border-radius: 6px;
+    /*box-shadow: 2px 2px 3px 3px #CCC;*/
+
+}
+
+input {
+    background: #E1FFE1;
+    border:1px #CCC solid;
+    padding:6px;
+}
+
+#main
+{
+    height:auto;
+    width:1200px;
+    background-color: rgb(0, 164, 215);
+    /*box-shadow: 1px 1px 5px 5px #CCC;*/
+}
+#header
+{
+/*    height:150px;
+    width:1200px;*/
+    background-color: rgb(0, 164, 215);
+}
+#header1
+{
+    height:150px;
+    width:170px;
+    background-color: rgb(0, 164, 215);
+/*    float:left;
+    text-align:center;
+    line-height:140px;*/
+}
+
+/*#headerimage{
+     height:150px;
+    width:170px;
+    
+}*/
+
+#logout{
+/*   background-color: rgb(0, 164, 215);
+   margin-top: 0px;*/
+float: right;
+}
+#header2
+{
+    height:150px;
+    width:425px;
+    /*background-color:#9DFF9D;*/
+    float:left;
+    text-align:center;
+    line-height:140px;
+
+}/*
+
+*/#header3
+{
+    height:auto;
+    width:605px;
+    /*    background-image: url(/images/logout.jpg);*/
+    /*    background-color:lightcyan;*/
+    float:left;
+    border-radius: 10px;
+
+
+}/*
+*/#header3 h1{
+    text-align: center;
+    font-size: 30px;
+    color: darkblue;
+    padding: 5px;
+    margin-top: 20px;
+}/*
+
+
+*/#header3 ul li
+{
+    display: inline;
+    text-decoration: none;
+    text-align:center;
+
+}
+#header4{
+    width:1200px;
+}
+#header5{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    float: right;
+    z-index: 2;
+}
+.loginone{
+    display: inline;
+
+    margin-left: 100px;
+}
+.loginone .loginA{
+    display: inline;
+    margin-left: 10px;
+}
+.loginone .loginC{
+    display: inline;
+    margin-left: 95px;
+}
+.loginTwo{
+    display: block;
+    /*float: right;*/
+    margin-left: 100px;
+}
+.loginTwo .loginB{
+    display: inline;
+    margin-left: 5px;
+}
+.loginTwo .loginD{
+    display: inline;
+    margin-left: 10px;
+}
+
+#post{
+    float: left;
+    
+}
+
+
+.homebody{
+     background-color:lightgray;
+    
+}
+
+     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    #footer {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      position: absolute;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    
+    
+    .row content{
+    display: inline;
+    }
+    
+/*   .col-sm-8 text-left{
+    float: left;   
+    }
+    */
+    .col-sm-2 sidenav{
+    
+    }
+    #rightbox{
+        margin-left: 20px;
+        width: 300px;
+    }
+    .images {
+        width: 200px;
+        height: 200px;
+    }
+    #smallleftbox{
+        margin-top: 100px;
+    }
+    #smallrightbox{
+        /*margin-top: 20px;*/
+        background-color: white;
+    }
+    #leftbox{
+        margin-top: 20px;
+        background-color: white;
+        padding: 20px;
+    }
+    
+    #post{
+        margin-top: 20px;
+        background-color: white;
+        
+    }

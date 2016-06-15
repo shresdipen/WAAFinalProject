@@ -97,6 +97,22 @@ public class FriendController extends AbstractController {
         
         return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());
     }
+    
+    @RequestMapping(value = "/addFriends.spring", method = RequestMethod.POST)
+    public ModelAndView addFriendHome(HttpServletRequest request) {
+        String newFriend = request.getParameter("newFriend");
+        String userName = request.getParameter("regUser");
+        RegisteredUser regUser = friends.getRegisteredUserByUserName(userName);
+        User user = friends.getUserByUserName(newFriend);
+        System.out.println("Frin add friend");
+        regUser.addFriend(user);
+        request.setAttribute("friends", friends.getFriendsOnly(userName));
+        request.setAttribute("suggested", friends.suggestFriends(userName));
+        request.setAttribute("users", friends.searchUsers(userName));
+        request.setAttribute("name", regUser.getUser().getUsername());
+        
+        return new ModelAndView("redirect:/home.spring?name=" + regUser.getUser().getUsername());
+    }
 
     protected ModelAndView handleRequestInternal(
             HttpServletRequest request,
