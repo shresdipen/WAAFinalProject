@@ -32,6 +32,7 @@ public class FriendController extends AbstractController {
 
     @Autowired
     UserService users;
+
     public FriendController() {
     }
 
@@ -43,7 +44,6 @@ public class FriendController extends AbstractController {
 //
 //        return "index";
 //    }
-
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getFriends(@RequestParam("name") String name, Model model) {
 
@@ -52,23 +52,28 @@ public class FriendController extends AbstractController {
         //model.addAttribute("users",friends.searchUsers(name));
         //model.addAttribute("notFriend", friends.suggestFriends(name));
         model.addAttribute("suggested", friends.suggestFriends(name));
-        
+
         return "users";
     }
-    
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public String getAllFriends(@RequestParam("names") String name,@ModelAttribute("newFriend") User user, Model model) {
 
+    //@RequestMapping(value="newFriend", method = RequestMethod.GET)
+    public ModelAndView newFriend() {
+        return new ModelAndView("users", "newFriend", new User());
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    public String getAllFriends(@RequestParam("names") String name, @RequestParam("newFriend") String userName, Model model) {
+
+        User user = friends.getByUserByUserName(userName);
         friends.addFriend(user);
         model.addAttribute("friends", friends.getFriendsOnly(name));
         model.addAttribute("user", friends.getUser(name));
         //model.addAttribute("users",friends.searchUsers(name));
         //model.addAttribute("notFriend", friends.suggestFriends(name));
         model.addAttribute("suggested", friends.suggestFriends(name));
-        
+
         return "users";
     }
-    
 
     protected ModelAndView handleRequestInternal(
             HttpServletRequest request,

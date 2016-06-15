@@ -69,4 +69,14 @@ public class PostDB {
     public void removePost(Post post){
         posts.remove(post);
     }
+    
+    public List<Post> getUserPost(String user){
+        List<Post> result = new ArrayList<>();
+        for(Post post : getPosts()){
+            if(post.getUserName().equals(user)){
+                result.add(post);
+            }
+        }
+        return result;
+    }
 }

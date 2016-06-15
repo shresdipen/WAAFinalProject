@@ -5,6 +5,9 @@
  */
 package edu.mum.waa545.project.controller;
 
+import edu.mum.waa545.project.model.Post;
+import edu.mum.waa545.project.model.User;
+import edu.mum.waa545.project.serviceimpl.FriendServiceImpl;
 import edu.mum.waa545.project.serviceimpl.PostServiceImpl;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,11 +34,10 @@ public class UploadController {
     public ModelAndView getWelcomePage(HttpServletRequest request) {
         return new ModelAndView("index");
     }
-    
+
     @RequestMapping(value = "uploader.spring", method = RequestMethod.POST)
     public ModelAndView upload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] uploadedFiles) throws IOException {
         List<String> images = new ArrayList<>();
-        System.out.println("CCCCCCCHHHHHHHHHHHHH");
         for (CommonsMultipartFile uploadFile : uploadedFiles) {
             String fullPath = request.getServletContext().getRealPath("redirect.jsp");
             fullPath = fullPath.substring(0, fullPath.length() - 12) + "/uploadedFolder/";
@@ -44,22 +47,31 @@ public class UploadController {
             images.add("uploadedFolder/" + uploadFile.getOriginalFilename());
         }
         postService.addPost(images, request.getParameterMap());
-        request.setAttribute("posts", postService.getPosts());
-        return new ModelAndView("home");
+        String user =  (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        request.setAttribute("posts", postService.getUserPosts());
+        return new ModelAndView("redirect:home.spring");
     }
 
-    @RequestMapping(value = "upload.spring", method = RequestMethod.GET)
-    public ModelAndView getPage(String upload) {
-        return new ModelAndView("home");
-    }
 
     @Autowired
     PostServiceImpl postService;
+    
+    @Autowired
+    FriendServiceImpl friendService;
 
     @RequestMapping(value = "home.spring", method = RequestMethod.GET)
     public ModelAndView getHomePage(HttpServletRequest request) {
-        request.setAttribute("posts", postService.getPosts());
-        System.out.println("Posts::::: " + postService.getPosts());
+        List<Post> posts = new ArrayList<>(); 
+        posts.addAll(postService.getUserPosts());
+        List<User> friends = friendService.getAllUsers();
+        if(friends!=null && !friends.isEmpty()){
+            System.out.println("BeforeFriends: "+friends);
+            friends.get(0).setUsername("username2");
+            posts.addAll(postService.getFriendsPosts(friends));
+        }
+        request.setAttribute("posts", posts);
+        String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        request.setAttribute("userName", user);
         return new ModelAndView("home");
     }
 
@@ -68,8 +80,8 @@ public class UploadController {
         String parentPostId = request.getParameter("parentPostId");
         String childComment = request.getParameter("childComment");
         postService.addChildrenPost(parentPostId, childComment);
-        request.setAttribute("posts", postService.getPosts());
-        return new ModelAndView("home");
+        request.setAttribute("posts", postService.getUserPosts());
+        return new ModelAndView("redirect:home.spring");
     }
 
     @RequestMapping(value = "removeChildren.spring", method = RequestMethod.POST)
@@ -77,15 +89,15 @@ public class UploadController {
         String parentPostId = request.getParameter("parentPostId");
         String childPostId = request.getParameter("childPostId");
         postService.removeChildrenPost(parentPostId, childPostId);
-        request.setAttribute("posts", postService.getPosts());
-        return new ModelAndView("home");
+        request.setAttribute("posts", postService.getUserPosts());
+        return new ModelAndView("redirect:home.spring");
     }
 
     @RequestMapping(value = "removePost.spring", method = RequestMethod.POST)
     public ModelAndView removePost(HttpServletRequest request) {
         String postId = request.getParameter("postId");
         postService.removePost(postId);
-        request.setAttribute("posts", postService.getPosts());
-        return new ModelAndView("home");
+        request.setAttribute("posts", postService.getUserPosts());
+        return new ModelAndView("redirect:home.spring");
     }
 }

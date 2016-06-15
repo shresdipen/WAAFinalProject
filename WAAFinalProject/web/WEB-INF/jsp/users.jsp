@@ -48,7 +48,7 @@
         <hr/>
         Not Friends: 
         <div>
-            <form:form action="users.spring" method="POST">
+            <form action="users.spring" method="POST" commandName="newFriend">
                 <input type="hidden" value="${user.username}" name="names"/>
                 
                 <c:forEach items="${suggested}" var="addfrined">
@@ -56,7 +56,7 @@
                          15px">
                         <div class="thumbnail">
                             <div class="caption">
-                                <input type="hidden" value="${addfrined}" name="newFriend"/>
+                                <input type="hidden" value="${addfrined.username}" name="newFriend"/>
                                 User Name: ${addfrined.username}&nbsp;<input type="submit" value="Add"/> <br/>
                                 Last Name: ${addfrined.firstname}<br/>                   
                                 First Name: ${addfrined.lastname}                      
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </c:forEach>
-            </form:form>
+            </form>
         </div>
         <%--</c:forEach>--%>
     </body>
