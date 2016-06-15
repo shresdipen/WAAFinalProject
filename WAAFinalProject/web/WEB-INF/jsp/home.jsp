@@ -18,17 +18,20 @@
             Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
             <br/>
             Comment: <textarea name="comment" name="comment"> </textarea>
-            
+
             <br/>
             <input type="submit" value="Upload" />
         </form>
-        
+
         <hr/><hr/>
         <c:forEach items="${posts}" var="post">
-            <form action="removePost.spring" method="post">
-                <input type="hidden" name="postId" value="${post.postId}"/>
-                <input type="submit" value="Delete" />
-            </form>
+            <c:if test="${post.userName == userName}">
+
+                <form action="removePost.spring" method="post">
+                    <input type="hidden" name="postId" value="${post.postId}"/>
+                    <input type="submit" value="Delete" />
+                </form>
+            </c:if>
             <c:forEach items="${post.imageName}" var="image" >
                 <c:if test="${image != 'uploadedFolder/'}">
                     <img src="${image}" alt="Picture" style="border: black solid thick;" width="200px" height="200px"/>                
@@ -50,10 +53,12 @@
                     Post Id: ${child.postId} <br/>
                     <input type="hidden" name="parentPostId" value="${post.postId}"/>
                     <input type="hidden" name="childPostId" value="${child.postId}"/>
-                    <input type="submit" value="Delete" />
+                    <c:if test="${child.userName == userName}">
+                        <input type="submit" value="Delete" />
+                    </c:if>
                 </form>
+                <hr/>
             </c:forEach>
-
 
             <form action="addChildren.spring" method="post">
                 <input type="hidden" name="parentPostId" value="${post.postId}" />

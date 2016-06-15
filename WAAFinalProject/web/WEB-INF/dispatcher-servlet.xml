@@ -15,13 +15,10 @@
 
     
     <mvc:default-servlet-handler/>
-<<<<<<< HEAD
-=======
-    
->>>>>>> 3bc036f28dc9fa0f2b6cc7e82b8853a959ba96f8
     
     
     <mvc:annotation-driven/>
+    
     <context:component-scan base-package="edu.mum.waa545.project" />
     <context:component-scan base-package="edu.mum.waa545.project.service" />
     
@@ -45,4 +42,11 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="20971520" />   
+        <!--<property name="maxInMemorySize" value="1048576" />-->  
+    </bean>
+    
+    <!--<bean class="org.springframework.web.multipart.commons.CommonsMultipartFile" />-->
 </beans>

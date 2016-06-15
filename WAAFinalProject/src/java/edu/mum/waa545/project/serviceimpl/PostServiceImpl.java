@@ -7,6 +7,7 @@ package edu.mum.waa545.project.serviceimpl;
 
 import edu.mum.waa545.project.db.PostDB;
 import edu.mum.waa545.project.model.Post;
+import edu.mum.waa545.project.model.User;
 import edu.mum.waa545.project.service.PostService;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,22 @@ public class PostServiceImpl implements PostService{
          String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
          return postDB.getUserPost(user);
     }
+
+    @Override
+    public List<Post> getFriendsPosts(List<User> friends) {
+        List<Post> result = new ArrayList<>();
+        List<String> friendNames = new ArrayList<>(); 
+        for(User friend : friends){
+            friendNames.add(friend.getUsername());
+        }
+        for(Post post : getPosts()){
+            if(friendNames.contains(post.getUserName())){
+                result.add(post);
+            }
+        }
+        return result;
+    }
     
+   
     
 }

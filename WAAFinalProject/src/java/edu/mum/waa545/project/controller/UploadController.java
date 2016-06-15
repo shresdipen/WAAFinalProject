@@ -5,6 +5,9 @@
  */
 package edu.mum.waa545.project.controller;
 
+import edu.mum.waa545.project.model.Post;
+import edu.mum.waa545.project.model.User;
+import edu.mum.waa545.project.serviceimpl.FriendServiceImpl;
 import edu.mum.waa545.project.serviceimpl.PostServiceImpl;
 import java.io.File;
 import java.io.IOException;
@@ -52,10 +55,23 @@ public class UploadController {
 
     @Autowired
     PostServiceImpl postService;
+    
+    @Autowired
+    FriendServiceImpl friendService;
 
     @RequestMapping(value = "home.spring", method = RequestMethod.GET)
     public ModelAndView getHomePage(HttpServletRequest request) {
-        request.setAttribute("posts", postService.getUserPosts());
+        List<Post> posts = new ArrayList<>(); 
+        posts.addAll(postService.getUserPosts());
+        List<User> friends = friendService.getAllUsers();
+        if(friends!=null && !friends.isEmpty()){
+            System.out.println("BeforeFriends: "+friends);
+            friends.get(0).setUsername("username2");
+            posts.addAll(postService.getFriendsPosts(friends));
+        }
+        request.setAttribute("posts", posts);
+        String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        request.setAttribute("userName", user);
         return new ModelAndView("home");
     }
 
