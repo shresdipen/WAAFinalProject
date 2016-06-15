@@ -10,11 +10,11 @@
  
 <html>
 <head>
-    <title>Add Employee Form</title>
+    <title>Add Complaint Form</title>
 </head>
  
 <body>
-    <h2><spring:message code="lbl.page" text="Add New Employee" /></h2>
+    <h2><spring:message code="lbl.page" text="Add Complaint Form" /></h2>
     <br/>
     <form:form method="post" modelAttribute="employee">
         <table>
@@ -23,7 +23,7 @@
                 <td><form:input path="firstName" /></td>
             </tr>
             <tr>
-                <td><spring:message code="lbl.lastName" text="Last Name" /></td>
+                <td><spring:message code="lbl.lastName" text="Your complaint" /></td>
                 <td><form:input path="lastName" /></td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                 <td><form:input path="email" /></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Add Employee"/></td>
+                <td colspan="2"><input type="submit" value="Add complaint"/></td>
             </tr>
         </table>
     </form:form>

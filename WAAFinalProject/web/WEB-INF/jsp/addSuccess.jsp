@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add Employee Success</title>
+        <title>complaint Added Successfully</title>
     </head>
     <body>
         Employee has been added successfully.
