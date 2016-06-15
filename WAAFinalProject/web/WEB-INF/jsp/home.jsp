@@ -62,7 +62,7 @@
                     Post Id: ${child.postId} <br/>
                     <input type="hidden" name="parentPostId" value="${post.postId}"/>
                     <input type="hidden" name="childPostId" value="${child.postId}"/>
-                    <c:if test="${child.userName == userName}">
+                    <c:if test="${child.userName == userName || post.userName == userName}">
                         <input type="submit" value="Delete" />
                     </c:if>
                 </form>
