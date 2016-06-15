@@ -36,6 +36,6 @@ public interface FriendService {
     public List<User> suggestFriends(String userName);
     
     //
-    public User getByUserByUserName(String userName);
+    public User getUserByUserName(String userName);
 
 }

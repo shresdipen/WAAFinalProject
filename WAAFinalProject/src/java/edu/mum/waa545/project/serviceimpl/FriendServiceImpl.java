@@ -151,7 +151,7 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
-    public User getByUserByUserName(String userName) {
+    public User getUserByUserName(String userName) {
 
         User user = userService.findByUsername(userName);
         return user;

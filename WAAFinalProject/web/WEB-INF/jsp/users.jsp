@@ -50,13 +50,13 @@
         <div>
             <form action="users.spring" method="POST" commandName="newFriend">
                 <input type="hidden" value="${user.username}" name="names"/>
-                
                 <c:forEach items="${suggested}" var="addfrined">
                     <div class="col-sm-6 col-md-3" style="padding-bottom:
                          15px">
                         <div class="thumbnail">
                             <div class="caption">
-                                <input type="hidden" value="${addfrined.username}" name="newFriend"/>
+                                <!--<input type="hidden" value="${addfrined.username}" name="newFriend"/>-->
+                                <input type="text" value="${addfrined.username}" name="newFriend"/>
                                 User Name: ${addfrined.username}&nbsp;<input type="submit" value="Add"/> <br/>
                                 Last Name: ${addfrined.firstname}<br/>                   
                                 First Name: ${addfrined.lastname}                      

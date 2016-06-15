@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
  * @author kb
  */
 @Controller
+
 public class FriendController extends AbstractController {
 
     @Autowired
@@ -64,7 +65,7 @@ public class FriendController extends AbstractController {
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public String getAllFriends(@RequestParam("names") String name, @RequestParam("newFriend") String userName, Model model) {
 
-        User user = friends.getByUserByUserName(userName);
+        User user = friends.getUserByUserName(userName);
         friends.addFriend(user);
         model.addAttribute("friends", friends.getFriendsOnly(name));
         model.addAttribute("user", friends.getUser(name));
