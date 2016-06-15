@@ -19,6 +19,7 @@ public interface FriendService {
 
     //TO add a friend
     public void addFriend(RegisteredUser regUsers,User user);
+    public void removeFriend(RegisteredUser regUsers,User user);
 
     //To get all of your friends only
     public List<User> getFriendsOnly(String name);
