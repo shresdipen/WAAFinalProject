@@ -47,7 +47,7 @@ public class FriendController extends AbstractController {
         //model.addAttribute("users",friends.searchUsers(name));
         //model.addAttribute("notFriend", friends.suggestFriends(name));
         model.addAttribute("suggested", friends.suggestFriends(name));
-
+        System.out.println("From user get");
         return "users";
     }
 
@@ -75,14 +75,14 @@ public class FriendController extends AbstractController {
         String userName = request.getParameter("regUser");
         RegisteredUser regUser = friends.getRegisteredUserByUserName(userName);
         User user = friends.getUserByUserName(newFriend);
-
+        System.out.println("Frin add friend");
         regUser.addFriend(user);
         request.setAttribute("friends", friends.getFriendsOnly(userName));
         request.setAttribute("suggested", friends.suggestFriends(userName));
         request.setAttribute("users", friends.searchUsers(userName));
-        request.setAttribute("user", regUser.getUser());
+        request.setAttribute("name", regUser.getUser().getUsername());
         
-        return new ModelAndView("redirect:/users.spring");
+        return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());
     }
 
     protected ModelAndView handleRequestInternal(

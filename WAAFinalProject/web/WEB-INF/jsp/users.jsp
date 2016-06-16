@@ -16,7 +16,7 @@
         <h3> Welcome  ${user.username}, </h3>
         Your list of Friends:
         <hr/>
-        <input type="text" value="${user.username}" name="name"/>
+        <input type="text" value="${name}" name="name"/>
         <c:forEach items="${friends}" var="freind">
             <div class="col-sm-6 col-md-3" style="padding-bottom:
                  15px">
@@ -57,8 +57,9 @@
                     <div class="thumbnail">
                         <div class="caption">
                             <form action="addFriend.spring" method="POST">
-                                <input type="text" value="${addfrined.username}" name="newFriend"/>
-                                <input type="text" value="${user.username}" name="regUser"/>
+                                <input type="hidden" value="${addfrined.username}" name="newFriend"/>
+                                <input type="hidden" value="${user.username}" name="regUser"/>
+                                <input type="hidden" value="${name}" name="name"/>
                                 User Name: ${addfrined.username}&nbsp;<input type="submit" value="Add"/> <br/>
                                 Last Name: ${addfrined.firstname}<br/>                   
                                 First Name: ${addfrined.lastname}   
