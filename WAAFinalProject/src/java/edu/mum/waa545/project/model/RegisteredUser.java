@@ -44,5 +44,10 @@ public class RegisteredUser {
 
         this.friends.add(user);
     }
+    
+    public void removeFriend(User user){
+    
+        this.friends.remove(user);
+    }
 
 }

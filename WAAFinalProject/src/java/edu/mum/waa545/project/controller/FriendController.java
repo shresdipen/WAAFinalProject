@@ -11,11 +11,9 @@ import edu.mum.waa545.project.service.FriendService;
 import edu.mum.waa545.project.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,11 +48,26 @@ public class FriendController extends AbstractController {
         System.out.println("From user get");
         return "users";
     }
+    
+    @RequestMapping(value = "/removeUser.spring", method = RequestMethod.POST)
+    public ModelAndView removeFriend(HttpServletRequest request) {
+        String newFriend = request.getParameter("oldFriend");
+        String userName = request.getParameter("delUser");
+        RegisteredUser regUser = friends.getRegisteredUserByUserName(userName);
+        User user = friends.getUserByUserName(newFriend);
+        regUser.removeFriend(user);
+        request.setAttribute("friends", friends.getFriendsOnly(userName));
+        request.setAttribute("suggested", friends.suggestFriends(userName));
+        request.setAttribute("users", friends.searchUsers(userName));
+        request.setAttribute("name", regUser.getUser().getUsername());
+        
+        return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());
+    }
 
-    //@RequestMapping(value="newFriend", method = RequestMethod.GET)
-//    public ModelAndView newFriend() {
-//        return new ModelAndView("users", "newFriend", new User());
-//    }
+    @RequestMapping(value="myLogin", method = RequestMethod.GET)
+    public String myLogin() {
+        return "myLogin";
+    }
 
     @RequestMapping(value = "users.spring", method = RequestMethod.POST)
     public String getAllFriends(@RequestParam("names") String name, @RequestParam("newFriend") String userName, Model model) {

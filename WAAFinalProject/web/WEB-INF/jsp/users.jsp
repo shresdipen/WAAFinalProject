@@ -13,6 +13,12 @@
         <title>users</title>
     </head>
     <body>
+        <hr/>
+
+
+        Before the new file
+        =====================================
+        <hr/>
         <h3> Welcome  ${user.username}, </h3>
         Your list of Friends:
         <hr/>
@@ -22,9 +28,14 @@
                  15px">
                 <div class="thumbnail">
                     <div class="caption">
-                        User Name: ${freind.username}<br/>
-                        Last Name: ${freind.firstname}<br/>                   
-                        First Name: ${freind.lastname}                        
+                        <form action="/WAAFinalProject/removeUser.spring" method="POST">
+                            <input type="hidden" value="${freind.username}" name="oldFriend"/>
+                                <input type="hidden" value="${user.username}" name="delUser"/>
+                                <input type="hidden" value="${name}" name="name"/>
+                            User Name: ${freind.username} <input type="submit" value="Remove"/><br/>
+                            Last Name: ${freind.firstname}<br/>                   
+                            First Name: ${freind.lastname}  
+                        </form>
                     </div>
                 </div>
             </div>
@@ -49,8 +60,6 @@
         <hr/>
         List of Suggested Friends: 
         <div>
-
-            
             <c:forEach items="${suggested}" var="addfrined">
                 <div class="col-sm-6 col-md-3" style="padding-bottom:
                      15px">

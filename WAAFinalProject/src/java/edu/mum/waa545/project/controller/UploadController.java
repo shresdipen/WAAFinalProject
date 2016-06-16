@@ -65,8 +65,8 @@ public class UploadController {
         posts.addAll(postService.getUserPosts());
         List<User> friends = friendService.getAllUsers();
         if(friends!=null && !friends.isEmpty()){
-            System.out.println("BeforeFriends: "+friends);
-            friends.get(0).setUsername("username2");
+//            System.out.println("BeforeFriends: "+friends);
+//            friends.get(0).setUsername("username2");
             posts.addAll(postService.getFriendsPosts(friends));
         }
         request.setAttribute("posts", posts);

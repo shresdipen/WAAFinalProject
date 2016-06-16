@@ -123,4 +123,7 @@ public class FriendDB {
 
         this.friends.add(friend);
     }
+    public void removeFriend(RegisteredUser friend){
+        this.friends.remove(friend);
+    }
 }
