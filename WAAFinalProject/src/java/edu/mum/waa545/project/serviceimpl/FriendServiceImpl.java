@@ -45,6 +45,12 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
+    public void removeFriend(RegisteredUser regUser, User user) {
+
+        regUser.getFriends().remove(user);
+    }
+
+    @Override
     public List<User> getFriendsOnly(String userName) {
 
         List<RegisteredUser> allUsers = new ArrayList<>();
@@ -127,6 +133,9 @@ public class FriendServiceImpl implements FriendService {
             for (User nFriend : suggestedByState) {
                 if ((user.getAddress().getHighschool().equalsIgnoreCase(nFriend.getAddress().getHighschool()))) {
                     suggested.add(nFriend);
+                }
+                if (suggested.size() > 4) {
+                    break;
                 }
             }
         }

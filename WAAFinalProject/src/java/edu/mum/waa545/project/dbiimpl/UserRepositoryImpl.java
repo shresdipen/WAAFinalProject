@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
                 new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
         ourusers.add(new User("username2", "password2", "firstname2", "lastname2", 0, new Date(), "gender2",
                 new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
-        ourusers.add(new User("username3", "password3", "firstname3", "lastname3", 0, new Date(), "gender3",
+        ourusers.add(new User("vic", "password3", "firstname3", "lastname3", 0, new Date(), "gender3",
                 new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
         ourusers.add(new User("username4", "password4", "firstname4", "lastname4", 0, new Date(), "gender4",
                 new Address("US", "IA", "MUM Highschool", "Trump college", "US")));
@@ -72,11 +72,6 @@ public class UserRepositoryImpl implements UserRepository {
     public User findUserByName(String username) {
         for (User user : ourusers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
-                return user;
-            }
-
-           
-            if (user.getUsername().equals(username)) {
                 return user;
             }
              

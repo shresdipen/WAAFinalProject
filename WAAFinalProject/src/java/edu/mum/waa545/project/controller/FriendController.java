@@ -51,10 +51,10 @@ public class FriendController extends AbstractController {
     
     @RequestMapping(value = "/removeUser.spring", method = RequestMethod.POST)
     public ModelAndView removeFriend(HttpServletRequest request) {
-        String newFriend = request.getParameter("oldFriend");
+        String oldFriend = request.getParameter("oldFriend");
         String userName = request.getParameter("delUser");
         RegisteredUser regUser = friends.getRegisteredUserByUserName(userName);
-        User user = friends.getUserByUserName(newFriend);
+        User user = friends.getUserByUserName(oldFriend);
         regUser.removeFriend(user);
         request.setAttribute("friends", friends.getFriendsOnly(userName));
         request.setAttribute("suggested", friends.suggestFriends(userName));
