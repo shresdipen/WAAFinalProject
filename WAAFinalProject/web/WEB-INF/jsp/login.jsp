@@ -14,11 +14,11 @@
         <link rel="stylesheet" type="text/css" href="css/main.css">
 
     </head>
-    <body >
+    <body class="background">
         <!--<h1 align="center">Login Page</h1>-->
         <div id="main">
             <div id="header">
-                <div id="header1"><img border="0" src="images/logo.jpg"></div><!--end of header1-->
+                <div id="header1"><img src="images/logo.jpg" style="z-index: 2; float: right; display: inline; position:absolute;"/></div><!--end of header1-->
                 <div id="header2"></div><!--end of header2-->
                 <div id="header3">
 
@@ -32,14 +32,14 @@
                             %>
 
                             <div class="loginone">
-                                <div class="loginA"> Username :</div>
+                                <div class="loginA">Username :</div>
                                 <div class=loginC>Password :</div>
                             </div>
 
                             <div class="loginTwo">
                                 <div class="loginB"><input type="text" name="username" required="Wrong username" /></div>
-                                <div class="loginD"><input type="password" name="password" required="Wrong password" /></div>
-                                <div class="loginB"> <input type="submit" name="submit" value="LogIn"></div>
+                                <div class="loginD"><input type="password" name="password" required="Wrong password"  /></div>
+                                <div class="loginB"><input type="submit" name="submit" value="LogIn"/></div>
                             </div>
 
                             <!--                &nbsp; &nbsp;<a href="#" class="">forgot password ?</a>-->
@@ -48,10 +48,13 @@
                 </div>
             </div>
 
-            <div id="header4"><img border="0" src="images/bg.jpg" style="z-index: 2;">
-                <div id="header5"><img border="0" src="images/signup.jpg">
-                </div>
-            </div>
+            <div id="header4"><img src="images/bg.png" style="position:absolute; height: 1000px; width:1240px"/>"></div>
+                <div id="header5"><img border="0" src="images/signup.jpg" style=" border-radius: 25px; height: 950px; width: 400px;" > </div>
+                    <div id="header6"> <%@ include file="register.jsp" %></div>
+                    
+                   
+               
+            
         </div>
 
     </body>
