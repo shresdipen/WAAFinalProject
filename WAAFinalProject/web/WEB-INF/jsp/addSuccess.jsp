@@ -11,11 +11,14 @@
         <title>complaint Added Successfully</title>
     </head>
     <body>
-        Employee has been added successfully.
+        Complaint has been submitted successfully.
         ${employee.id}
         ${employee.id}
         ${employee.firstName}
         ${employee.lastName}
         ${employee.email}
+        
+        <a href="home.spring" > home</a>        
+        
     </body>
 </html>

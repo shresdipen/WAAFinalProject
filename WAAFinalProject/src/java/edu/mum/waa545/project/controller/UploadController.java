@@ -7,6 +7,7 @@ package edu.mum.waa545.project.controller;
 
 import edu.mum.waa545.project.model.Post;
 import edu.mum.waa545.project.model.User;
+import edu.mum.waa545.project.service.FriendService;
 import edu.mum.waa545.project.serviceimpl.FriendServiceImpl;
 import edu.mum.waa545.project.serviceimpl.PostServiceImpl;
 import java.io.File;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,8 +63,10 @@ public class UploadController {
     @Autowired
     FriendServiceImpl friendService;
 
+    @Autowired
+    FriendService friendsA;
     @RequestMapping(value = "home.spring", method = RequestMethod.GET)
-    public ModelAndView getHomePage(HttpServletRequest request) {
+    public ModelAndView getHomePage(HttpServletRequest request, Model model) {
         List<Post> posts = new ArrayList<>(); 
         posts.addAll(postService.getUserPosts());
         String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -83,6 +87,13 @@ public class UploadController {
         request.setAttribute("posts", result);
         String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         request.setAttribute("userName", user);
+        
+        model.addAttribute("friends", friendsA.getFriendsOnly(user));
+        model.addAttribute("user", friendsA.getUser(user));
+        //model.addAttribute("users",friends.searchUsers(name));
+        //model.addAttribute("notFriend", friends.suggestFriends(name));
+        model.addAttribute("suggested", friendsA.suggestFriends(user));
+        System.out.println("From user get");
         return new ModelAndView("home");
     }
 
