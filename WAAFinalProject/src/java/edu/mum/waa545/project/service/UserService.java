@@ -10,4 +10,6 @@ public interface UserService {
     User findByUsername(String username);
     List<User> getAllusers();
   
+    //this is a service level method since its a service used by everyone
+    boolean checkDuplicate(String username);
 }

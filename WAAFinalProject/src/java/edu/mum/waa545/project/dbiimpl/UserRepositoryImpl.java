@@ -20,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
     //initialize our users in the constructor we no use db
     public UserRepositoryImpl() {
 
-        ourusers.add(new User("username1", "password1", "helen", "lastname1", 0, new Date(), "gender1",
+        ourusers.add(new User("username1", "password1", "firstname1", "lastname1", 0, new Date(), "gender1",
                 new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
         ourusers.add(new User("username2", "password2", "firstname2", "lastname2", 0, new Date(), "gender2",
                 new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
@@ -41,6 +41,20 @@ public class UserRepositoryImpl implements UserRepository {
         ourusers.add(new User("username10", "password10", "firstname10", "lastname10", 0, new Date(), "gender10",
                 new Address("US", "IA", "Linn Highschool", "Trump college", "US")));
 
+        ourusers.add(new User("username5", "password5", "firstname5", "lastname5", 0, new Date(), "gender5",
+                new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
+        ourusers.add(new User("username6", "password6", "firstname6", "lastname6", 0, new Date(), "gender6",
+                new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
+        ourusers.add(new User("username7", "password7", "firstname7", "lastname7", 0, new Date(), "gender7",
+                new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
+        ourusers.add(new User("username8", "password8", "firstname8", "lastname8", 0, new Date(), "gender8",
+                new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
+        ourusers.add(new User("username9", "password9", "firstname9", "lastname9", 0, new Date(), "gender9",
+                new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
+        ourusers.add(new User("username10", "password10", "firstname10", "lastname10", 0, new Date(), "gender10",
+                new Address("US", "IA", "Lincon Highschool", "Trump college", "US")));
+        
+
     }
 
     @Override
@@ -48,10 +62,7 @@ public class UserRepositoryImpl implements UserRepository {
         return ourusers;
     }
 
-//    @Override
-//    public void setOurusers(List<User> ourusers) {
-//        
-//    }
+
     @Override
     public void save(User user) {
         ourusers.add(user);
@@ -63,7 +74,12 @@ public class UserRepositoryImpl implements UserRepository {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
-            
+
+           
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+             
         }
         return null;
     }

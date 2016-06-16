@@ -13,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+
         Welcome ${user.firstname} ${user.lastname},
         
         <br />
@@ -22,5 +23,27 @@
         
         <br />
         <a href="logout.rajeev">Logout</a>
+
+        <h1 align =" center">welcome page</h1>
+        <br> test model attribute tt
+        ${allusers.get(6).username}
+        <br>
+        <br>
+        <h3>user details</h3>
+        ${username}
+        <br> username ${newuser.username}
+        <br> password ${newuser.password}
+        <br> firstname ${newuser.firstname}
+        <br> lastname ${newuser.lastname}
+        <br> age ${newuser.age}
+        <br> date of birth ${newuser.dateofbirth}
+        <br> gender ${newuser.gender}
+        <br> <h3>the following is address information</h3>
+        <br> country ${newuser.address.country}
+        <br> state ${newuser.address.state}
+        <br> highschool ${newuser.address.highschool}
+        <br> college ${newuser.address.college}
+        <br> nationality ${newuser.address.nationality}
+
     </body>
 </html>
