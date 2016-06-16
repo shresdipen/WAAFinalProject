@@ -1,5 +1,6 @@
 package edu.mum.waa545.project.serviceimpl;
 
+import edu.mum.waa545.project.db.FriendDB;
 import edu.mum.waa545.project.db.UserRepository;
 import edu.mum.waa545.project.model.Address;
 import edu.mum.waa545.project.model.RegisteredUser;
@@ -15,15 +16,24 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userrepository;
-    
+    UserRepository userrepository;
+
     @Autowired
     private RegisteredUser reguser;
+
+    @Autowired
+    private FriendDB friendDb;
 
     @Override
     public void save(User user) {
         userrepository.save(user);
         reguser.setUser(user);
+
+        friendDb.getFriends().add(reguser);
+
+        System.out.println("User from service: " + user);
+        userrepository.save(user);
+        System.out.println("From Service: " + userrepository.getAllusers());
 
     }
 
@@ -32,6 +42,8 @@ public class UserServiceImpl implements UserService {
         User user = userrepository.findUserByName(username);
         return user;
 
+        //System.out.println("Find by username: "+userrepository.getAllusers());
+        //return userrepository.findUserByName(username);
     }
 
     @Override
@@ -52,6 +64,12 @@ public class UserServiceImpl implements UserService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public User findByUsername(String username, UserRepository userRepository) {
+        System.out.println("User Repo: " + userRepository.getAllusers());
+        return userRepository.findUserByName(username);
     }
 
 }

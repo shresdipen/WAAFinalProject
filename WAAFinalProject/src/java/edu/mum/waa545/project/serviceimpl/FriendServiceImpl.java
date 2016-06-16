@@ -126,6 +126,8 @@ public class FriendServiceImpl implements FriendService {
                     suggestedByState.add(nFriend);
                 }
             }
+        } else if (suggestedFriends.size() <= 5) {
+            suggested = suggestedFriends;
         }
 
         if (suggestedByState.size() > 5) {
@@ -149,11 +151,12 @@ public class FriendServiceImpl implements FriendService {
         List<User> friendsList = getFriendsOnly(userName);
         List<User> notFriends = new ArrayList<>();
         notFriends = userList;
+        if (friendsList != null) {
+            for (User friend : friendsList) {
 
-        for (User friend : friendsList) {
+                notFriends.remove(friend);
 
-            notFriends.remove(friend);
-
+            }
         }
         return notFriends;
     }

@@ -26,7 +26,6 @@
 
         <h1 align =" center">welcome page</h1>
         <br> test model attribute tt
-        ${allusers.get(6).username}
         <br>
         <br>
         <h3>user details</h3>

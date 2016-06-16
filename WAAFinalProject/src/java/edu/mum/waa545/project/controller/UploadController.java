@@ -65,7 +65,8 @@ public class UploadController {
     public ModelAndView getHomePage(HttpServletRequest request) {
         List<Post> posts = new ArrayList<>(); 
         posts.addAll(postService.getUserPosts());
-        List<User> friends = friendService.getAllUsers();
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<User> friends = friendService.getFriendsOnly(userName);
         if(friends!=null && !friends.isEmpty()){
 //            System.out.println("BeforeFriends: "+friends);
 //            friends.get(0).setUsername("username2");
@@ -73,7 +74,13 @@ public class UploadController {
         }
         Comparator comp = Collections.reverseOrder();
         Collections.sort(posts,comp);
-        request.setAttribute("posts", posts);
+        List<Post> result = new ArrayList<>();
+        for(Post post : posts){
+            if(!result.contains(post)){
+                result.add(post);
+            }
+        }
+        request.setAttribute("posts", result);
         String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         request.setAttribute("userName", user);
         return new ModelAndView("home");

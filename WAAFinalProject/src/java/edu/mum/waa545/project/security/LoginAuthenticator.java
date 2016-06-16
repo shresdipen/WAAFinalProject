@@ -5,6 +5,7 @@
  */
 package edu.mum.waa545.project.security;
 
+import edu.mum.waa545.project.db.UserRepository;
 import edu.mum.waa545.project.model.User;
 import edu.mum.waa545.project.service.UserService;
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -24,14 +28,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 public class LoginAuthenticator implements AuthenticationProvider {
     
     @Autowired
-    private UserService userService;
+    UserService userService;
+    
+    @Autowired
+    UserRepository userRepository;
+    
     
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("Userssss2: "+userRepository.getAllusers());
         String username = authentication.getName();
         String password = (String)authentication.getCredentials();
         
-        User user = userService.findByUsername(username);
+        User user = userService.findByUsername(username, userRepository);
         System.out.println(user+","+username+","+password);
         if(user == null)
             return null;
@@ -53,5 +62,17 @@ public class LoginAuthenticator implements AuthenticationProvider {
     public boolean supports(Class<?> type) {
         return type.equals(UsernamePasswordAuthenticationToken.class);
     }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    
+    
+    @RequestMapping(value="/loginasdasdasd", method=RequestMethod.GET)
+    public String getLoginPage() {
+        System.out.println("From Login: "+userService.getAllusers());
+        return "login";
+    }
+    
 }
 
