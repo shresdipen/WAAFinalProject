@@ -16,7 +16,7 @@
         <h3> Welcome  ${user.username}, </h3>
         Your list of Friends:
         <hr/>
-
+        <input type="text" value="${user.username}" name="name"/>
         <c:forEach items="${friends}" var="freind">
             <div class="col-sm-6 col-md-3" style="padding-bottom:
                  15px">
@@ -31,6 +31,7 @@
         </c:forEach>
 
         List of searched users:
+        <hr/>
         <div>
             <c:forEach items="${users}" var="user">
                 <div class="col-sm-6 col-md-3" style="padding-bottom:
@@ -46,25 +47,27 @@
             </c:forEach>
         </div>
         <hr/>
-        Not Friends: 
+        List of Suggested Friends: 
         <div>
-            <form action="users.spring" method="POST" commandName="newFriend">
-                <input type="hidden" value="${user.username}" name="names"/>
-                <c:forEach items="${suggested}" var="addfrined">
-                    <div class="col-sm-6 col-md-3" style="padding-bottom:
-                         15px">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <!--<input type="hidden" value="${addfrined.username}" name="newFriend"/>-->
+
+            
+            <c:forEach items="${suggested}" var="addfrined">
+                <div class="col-sm-6 col-md-3" style="padding-bottom:
+                     15px">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <form action="addFriend.spring" method="POST">
                                 <input type="text" value="${addfrined.username}" name="newFriend"/>
+                                <input type="text" value="${user.username}" name="regUser"/>
                                 User Name: ${addfrined.username}&nbsp;<input type="submit" value="Add"/> <br/>
                                 Last Name: ${addfrined.firstname}<br/>                   
-                                First Name: ${addfrined.lastname}                      
-                            </div>
+                                First Name: ${addfrined.lastname}   
+                            </form>
                         </div>
                     </div>
-                </c:forEach>
-            </form>
+                </div>
+            </c:forEach>
+
         </div>
         <%--</c:forEach>--%>
     </body>

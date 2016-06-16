@@ -27,7 +27,7 @@
         <hr/><hr/>
         <c:forEach items="${posts}" var="post">
             <c:if test="${post.userName == userName}">
-
+                
                 <form action="removePost.spring" method="post">
                     <input type="hidden" name="postId" value="${post.postId}"/>
                     <input type="submit" value="Delete" />

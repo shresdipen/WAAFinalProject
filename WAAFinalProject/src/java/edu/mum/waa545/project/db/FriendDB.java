@@ -45,7 +45,10 @@ public class FriendDB {
         u4.setLastname("Vic");
         u4.setUsername("vic");
 
-        List<User> friends1 = Arrays.asList(u2, u3, u4);
+        List<User> friends1 = new ArrayList<>();
+        friends1.add(u2);
+        friends1.add(u3);
+        friends1.add(u4);
 
         reg1.setFriends(friends1);
 
@@ -57,7 +60,7 @@ public class FriendDB {
         u5.setUsername("jen");
 
         reg2.setUser(u5);
-        
+
         User u6 = new User();
         u6.setFirstname("Beimnet");
         u6.setLastname("beimni");
@@ -83,8 +86,14 @@ public class FriendDB {
         u10.setLastname("Lev");
         u10.setUsername("lev");
 
-        List<User> friends2 = Arrays.asList(u6, u7, u8, u9, u10);
-        
+        List<User> friends2 = new ArrayList<>(); //= new ArrayList..asList(u6, u7, u8, u9, u10);
+
+        friends2.add(u6);
+        friends2.add(u7);
+        friends2.add(u8);
+        friends2.add(u9);
+        friends2.add(u10);
+
         reg2.setFriends(friends2);
 
         friends.add(reg1);
@@ -97,5 +106,21 @@ public class FriendDB {
 
     public void setFriends(List<RegisteredUser> friends) {
         this.friends = friends;
+    }
+
+    public RegisteredUser getRegisteredUserByUserName(String userName) {
+
+        for (RegisteredUser regUser : friends) {
+
+            if (regUser.getUser().getUsername().equalsIgnoreCase(userName)) {
+                return regUser;
+            }
+        }
+        return null;
+    }
+
+    public void addFriend(RegisteredUser friend) {
+
+        this.friends.add(friend);
     }
 }

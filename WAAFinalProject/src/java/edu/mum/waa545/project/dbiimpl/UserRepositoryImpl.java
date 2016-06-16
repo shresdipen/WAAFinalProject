@@ -61,7 +61,6 @@ public class UserRepositoryImpl implements UserRepository {
     public User findUserByName(String username) {
         for (User user : ourusers) {
             if (user.getUsername().equalsIgnoreCase(username)) {
-                System.out.println("User name" + user.getFirstname());
                 return user;
             }
             
