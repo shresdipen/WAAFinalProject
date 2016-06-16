@@ -10,25 +10,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
+        <script>
+            function disablePost() {
+                disable = true;
+                if (document.getElementsByName("uploadedFiles")[0].value != "" || document.getElementsByName("comment")[0].value != "") {
+                    disable = false;
+                }
+                document.getElementById("uploadPost").disabled = disable;
+            };
+        </script>
     </head>
     <body>
-        <h1>Welcome User</h1>
+        <h1>Welcome User${disable}</h1>
         <form action="uploader.spring" method="post" enctype="multipart/form-data">
-            Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple=""/>
+            Select images: <input type="file" name="uploadedFiles" accept="image/*" multiple="" onchange ="disablePost()"/>
             <br/>
-            
-            Comment: <textarea name="comment"> </textarea>
+            Comment: <textarea name="comment" onkeyup="disablePost()"> </textarea>
 
             <br/>
-            <input type="submit" value="Upload" />
+            <input type="submit" value="Upload" id="uploadPost" disabled="true"/>
         </form>
 
         <hr/><hr/>
         <c:forEach items="${posts}" var="post">
             <c:if test="${post.userName == userName}">
-                
+
                 <form action="removePost.spring" method="post">
                     <input type="hidden" name="postId" value="${post.postId}"/>
                     <input type="submit" value="Delete" />
@@ -42,36 +49,36 @@
             </c:forEach>
             <br/>
             Comment: ${post.comment}
-        
-                <br/>
-                Username: ${post.userName}
-                <br/>
-                Post Id: ${post.postId}
-                <hr/>
-                <c:forEach items="${post.childrenPost}" var="child">
-                    <form action="removeChildren.spring" method="post">
-                        User: ${child.userName} <br/>
-                        Comment: ${child.comment} <br/>
-                        Post Id: ${child.postId} <br/>
-                        <input type="hidden" name="parentPostId" value="${post.postId}"/>
-                        <input type="hidden" name="childPostId" value="${child.postId}"/>
-                        <c:if test="${child.userName == userName}">
-                            <input type="submit" value="Delete" />
-                        </c:if>
-                    </form>
-                    <hr/>
-                </c:forEach>
 
-                <form action="addChildren.spring" method="post">
-                    <input type="hidden" name="parentPostId" value="${post.postId}" />
-                    Comment: <textarea name="childComment"></textarea>
-
-                    <input type="submit" value="Comment" />
+            <br/>
+            Username: ${post.userName}
+            <br/>
+            Post Id: ${post.postId}
+            <hr/>
+            <c:forEach items="${post.childrenPost}" var="child">
+                <form action="removeChildren.spring" method="post">
+                    User: ${child.userName} <br/>
+                    Comment: ${child.comment} <br/>
+                    Post Id: ${child.postId} <br/>
+                    <input type="hidden" name="parentPostId" value="${post.postId}"/>
+                    <input type="hidden" name="childPostId" value="${child.postId}"/>
+                    <c:if test="${child.userName == userName || post.userName == userName}">
+                        <input type="submit" value="Delete" />
+                    </c:if>
                 </form>
-
-
-
-                <hr/><hr/>
+                <hr/>
             </c:forEach>
+
+            <form action="addChildren.spring" method="post">
+                <input type="hidden" name="parentPostId" value="${post.postId}" />
+                Comment: <textarea name="childComment"></textarea>
+
+                <input type="submit" value="Comment"/>
+            </form>
+
+
+
+            <hr/><hr/>
+        </c:forEach>
     </body>
 </html>

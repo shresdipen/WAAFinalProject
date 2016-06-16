@@ -12,6 +12,8 @@ import edu.mum.waa545.project.serviceimpl.PostServiceImpl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,8 @@ public class UploadController {
             friends.get(0).setUsername("username2");
             posts.addAll(postService.getFriendsPosts(friends));
         }
+        Comparator comp = Collections.reverseOrder();
+        Collections.sort(posts,comp);
         request.setAttribute("posts", posts);
         String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         request.setAttribute("userName", user);

@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author dipen
  */
-public class Post {
+public class Post implements Comparable<Post>{
     public String userName;
     public List<String> imageName;
     public String comment;
@@ -98,6 +98,18 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" + "userName=" + userName + ", imageName=" + imageName + ", comment=" + comment + ", postId=" + postId + ", childrenPost=" + childrenPost + '}';
-    }    
+    } 
+
+    @Override
+    public int compareTo(Post o) {
+        int post1 = Integer.parseInt(this.getPostId());
+        int post2 = Integer.parseInt(o.getPostId());
+       if(post1<post2) return -1;
+       else if(post1<post2) return 1;
+       else return 0;
+    }
+
+        
+    
     
 }
