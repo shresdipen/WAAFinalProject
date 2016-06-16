@@ -16,7 +16,7 @@
         <h3> Welcome  ${user.username}, </h3>
         Your list of Friends:
         <hr/>
-        <input type="text" value="${name}" name="name"/>
+        <input type="hidden" value="${name}" name="name"/>
         <c:forEach items="${friends}" var="freind">
             <div class="col-sm-6 col-md-3" style="padding-bottom:
                  15px">
