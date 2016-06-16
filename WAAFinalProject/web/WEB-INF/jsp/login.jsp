@@ -49,7 +49,7 @@
             </div>
 
             <div id="header4"><img src="images/bg.png" style="position:absolute; height: 1000px; width:1240px"/>"></div>
-                <div id="header5"><img border="0" src="images/signup.jpg" style=" border-radius: 25px; height: 950px; width: 400px;" > </div>
+                <div id="header5"><img border="0" src="images/signup.jpg" style=" border-radius: 25px; height: 970px; width: 400px;" > </div>
                     <div id="header6"> <%@ include file="register.jsp" %></div>
                     
                    

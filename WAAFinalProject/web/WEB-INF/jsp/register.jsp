@@ -25,7 +25,7 @@
 <form action="userRegister.spring" modelAttribute="user" method="POST" >
             <table>
                 <tr>
-             <td><h4>User Name: </h4> </td>
+                    <td><h4>User Name:</h4> </td>
              <td><input type="text" name="username" maxlength="15" minlength="5" required="true"/> </td>
                  </tr><tr>
             <td><h4>Password: </h4></td>
