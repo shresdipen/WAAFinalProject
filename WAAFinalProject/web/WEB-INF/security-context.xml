@@ -14,13 +14,16 @@
 	<security:http use-expressions="true">
 		<security:csrf disabled="true" />
 
-		<security:intercept-url pattern="/welcome"
+		<security:intercept-url pattern="/"
+			access="hasRole('ROLE_USER')" />
+                
+                <security:intercept-url pattern="/*.spring"
 			access="hasRole('ROLE_USER')" />
                 
                 <security:form-login login-page="/login"
 			login-processing-url="/login.rajeev" 
 			default-target-url="/welcome"
-			authentication-failure-url="/login?err=1" 
+                        authentication-failure-url="/login?err=1" 
 			username-parameter="username"
 			password-parameter="password" />
                 
