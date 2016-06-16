@@ -36,9 +36,12 @@ public class FriendServiceImpl implements FriendService {
     UserRepository users;
 
     @Override
-    public void addFriend(User user) {
+    public void addFriend(RegisteredUser regUsers, User user) {
 
-        regUser.getFriends().add(user);
+//        RegisteredUser regUser1 = friend.getRegisteredUserByUserName(user.getUsername());
+//        regUser1.getFriends().add(user);
+        regUsers.getFriends().add(user);
+
     }
 
     @Override
@@ -109,21 +112,18 @@ public class FriendServiceImpl implements FriendService {
                 suggestedFriends.add(nFriend);
             }
         }
-         
+
         if (suggestedFriends.size() > 5) {
-           
+
             for (User nFriend : suggestedFriends) {
                 if ((user.getAddress().getState().equalsIgnoreCase(nFriend.getAddress().getState()))) {
                     suggestedByState.add(nFriend);
                 }
-//                if (suggestedByState.size() > 5) {
-//                    break;
-//                }
             }
         }
-        
+
         if (suggestedByState.size() > 5) {
-            
+
             for (User nFriend : suggestedByState) {
                 if ((user.getAddress().getHighschool().equalsIgnoreCase(nFriend.getAddress().getHighschool()))) {
                     suggested.add(nFriend);
@@ -138,23 +138,28 @@ public class FriendServiceImpl implements FriendService {
 
         List<User> userList = getAllUsers();
         List<User> friendsList = getFriendsOnly(userName);
-        List<User> notFriends = userList;
+        List<User> notFriends = new ArrayList<>();
+        notFriends = userList;
 
         for (User friend : friendsList) {
-            for (User user : userList) {
-                if (friend.equals(user)) {
-                    notFriends.remove(user);
-                }
-            }
+
+            notFriends.remove(friend);
+
         }
         return notFriends;
     }
 
     @Override
-    public User getByUserByUserName(String userName) {
+    public User getUserByUserName(String userName) {
 
         User user = userService.findByUsername(userName);
         return user;
+    }
+
+    @Override
+    public RegisteredUser getRegisteredUserByUserName(String userName) {
+
+        return friend.getRegisteredUserByUserName(userName);
     }
 
 }

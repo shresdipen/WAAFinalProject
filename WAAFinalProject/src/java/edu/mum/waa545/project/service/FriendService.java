@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public interface FriendService {
 
     //TO add a friend
-    public void addFriend(User user);
+    public void addFriend(RegisteredUser regUsers,User user);
 
     //To get all of your friends only
     public List<User> getFriendsOnly(String name);
@@ -36,6 +36,8 @@ public interface FriendService {
     public List<User> suggestFriends(String userName);
     
     //
-    public User getByUserByUserName(String userName);
+    public User getUserByUserName(String userName);
 
+    //getting registered users
+    public RegisteredUser getRegisteredUserByUserName(String userName);
 }

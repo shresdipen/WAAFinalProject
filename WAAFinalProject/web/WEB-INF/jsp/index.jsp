@@ -11,7 +11,7 @@
 
     <body>
 
-        <form action="users.spring" method="GET">
+        <form action="/WAAFinalProject/users.spring" method="GET">
             <input type="text" name="name"/>
             <input type="submit" value="Login"/>
         </form>        

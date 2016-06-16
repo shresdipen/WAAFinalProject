@@ -63,9 +63,7 @@ public class UserRepositoryImpl implements UserRepository {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
+            
         }
         return null;
     }

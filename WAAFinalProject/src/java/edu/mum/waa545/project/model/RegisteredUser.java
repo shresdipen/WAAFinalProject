@@ -40,4 +40,9 @@ public class RegisteredUser {
         this.user = user;
     }
 
+    public void addFriend(User user) {
+
+        this.friends.add(user);
+    }
+
 }

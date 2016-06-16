@@ -5,11 +5,13 @@
  */
 package edu.mum.waa545.project.controller;
 
+import edu.mum.waa545.project.model.RegisteredUser;
 import edu.mum.waa545.project.model.User;
 import edu.mum.waa545.project.service.FriendService;
 import edu.mum.waa545.project.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
  * @author kb
  */
 @Controller
+
 public class FriendController extends AbstractController {
 
     @Autowired
@@ -36,15 +39,7 @@ public class FriendController extends AbstractController {
     public FriendController() {
     }
 
-//    @RequestMapping("/index")
-//    public String friends(Model model) {
-//        List<User> friend = friends.getFriends(name);
-//
-//        model.addAttribute("friends", friend);
-//
-//        return "index";
-//    }
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "users.spring", method = RequestMethod.GET)
     public String getFriends(@RequestParam("name") String name, Model model) {
 
         model.addAttribute("friends", friends.getFriendsOnly(name));
@@ -52,27 +47,42 @@ public class FriendController extends AbstractController {
         //model.addAttribute("users",friends.searchUsers(name));
         //model.addAttribute("notFriend", friends.suggestFriends(name));
         model.addAttribute("suggested", friends.suggestFriends(name));
-
+        System.out.println("From user get");
         return "users";
     }
 
     //@RequestMapping(value="newFriend", method = RequestMethod.GET)
-    public ModelAndView newFriend() {
-        return new ModelAndView("users", "newFriend", new User());
-    }
+//    public ModelAndView newFriend() {
+//        return new ModelAndView("users", "newFriend", new User());
+//    }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(value = "users.spring", method = RequestMethod.POST)
     public String getAllFriends(@RequestParam("names") String name, @RequestParam("newFriend") String userName, Model model) {
 
-        User user = friends.getByUserByUserName(userName);
-        friends.addFriend(user);
+        User user = friends.getUserByUserName(userName);
         model.addAttribute("friends", friends.getFriendsOnly(name));
         model.addAttribute("user", friends.getUser(name));
-        //model.addAttribute("users",friends.searchUsers(name));
-        //model.addAttribute("notFriend", friends.suggestFriends(name));
         model.addAttribute("suggested", friends.suggestFriends(name));
 
         return "users";
+    }
+
+    
+    
+    @RequestMapping(value = "/addFriend.spring", method = RequestMethod.POST)
+    public ModelAndView addFriend(HttpServletRequest request) {
+        String newFriend = request.getParameter("newFriend");
+        String userName = request.getParameter("regUser");
+        RegisteredUser regUser = friends.getRegisteredUserByUserName(userName);
+        User user = friends.getUserByUserName(newFriend);
+        System.out.println("Frin add friend");
+        regUser.addFriend(user);
+        request.setAttribute("friends", friends.getFriendsOnly(userName));
+        request.setAttribute("suggested", friends.suggestFriends(userName));
+        request.setAttribute("users", friends.searchUsers(userName));
+        request.setAttribute("name", regUser.getUser().getUsername());
+        
+        return new ModelAndView("redirect:/users.spring?name=" + regUser.getUser().getUsername());
     }
 
     protected ModelAndView handleRequestInternal(
