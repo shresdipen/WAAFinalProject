@@ -73,7 +73,13 @@ public class UploadController {
         }
         Comparator comp = Collections.reverseOrder();
         Collections.sort(posts,comp);
-        request.setAttribute("posts", posts);
+        List<Post> result = new ArrayList<>();
+        for(Post post : posts){
+            if(!result.contains(post)){
+                result.add(post);
+            }
+        }
+        request.setAttribute("posts", result);
         String user = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         request.setAttribute("userName", user);
         return new ModelAndView("home");
