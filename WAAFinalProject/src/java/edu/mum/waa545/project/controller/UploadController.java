@@ -65,7 +65,8 @@ public class UploadController {
     public ModelAndView getHomePage(HttpServletRequest request) {
         List<Post> posts = new ArrayList<>(); 
         posts.addAll(postService.getUserPosts());
-        List<User> friends = friendService.getAllUsers();
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<User> friends = friendService.getFriendsOnly(userName);
         if(friends!=null && !friends.isEmpty()){
 //            System.out.println("BeforeFriends: "+friends);
 //            friends.get(0).setUsername("username2");
