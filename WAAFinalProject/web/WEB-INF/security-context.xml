@@ -14,11 +14,11 @@
 	<security:http use-expressions="true">
 		<security:csrf disabled="true" />
 
-		<security:intercept-url pattern="/"
+<!--		<security:intercept-url pattern="/"
 			access="hasRole('ROLE_USER')" />
                 
                 <security:intercept-url pattern="/*.spring"
-			access="hasRole('ROLE_USER')" />
+			access="hasRole('ROLE_USER')" />-->
                 
                 <security:form-login login-page="/login"
 			login-processing-url="/login.rajeev" 
@@ -32,11 +32,14 @@
         
         <bean id="userAuthBean"
 	class="edu.mum.waa545.project.security.LoginAuthenticator" />
+        
+        
 	<security:authentication-manager>
 		<security:authentication-provider
 			ref="userAuthBean">
 		</security:authentication-provider>
 	</security:authentication-manager>
         
-        <context:component-scan base-package="edu.mum.waa545.project" />         
+        <context:component-scan base-package="edu.mum.waa545.project" />     
+        <context:annotation-config />
 </beans>

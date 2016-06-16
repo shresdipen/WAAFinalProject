@@ -1,7 +1,9 @@
 package edu.mum.waa545.project.controller;
 
+import edu.mum.waa545.project.db.UserRepository;
 import edu.mum.waa545.project.model.Address;
 import edu.mum.waa545.project.model.User;
+import edu.mum.waa545.project.security.LoginAuthenticator;
 import edu.mum.waa545.project.service.UserService;
 import edu.mum.waa545.project.util.userRegistrationUtil;
 import java.text.SimpleDateFormat;
@@ -27,6 +29,12 @@ public class UserRegisterController {
     
     @Autowired
     private userRegistrationUtil userregistrationutil;
+    
+    @Autowired
+    UserRepository userRepository;
+   
+    @Autowired
+    LoginAuthenticator loginAuthenticator;
     
    @RequestMapping("/register")
    public ModelAndView user(){
@@ -80,7 +88,14 @@ public class UserRegisterController {
         model.addAttribute("allusers", userService.getAllusers());
         model.addAttribute("newuser", newuser);
         userService.save(newuser);
+        System.out.println("Userssss: "+userRepository.getAllusers());
+        loginAuthenticator.setUserRepository(userRepository);
         return "welcome";
     }
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    
 }

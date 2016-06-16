@@ -17,17 +17,19 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserRepository userrepository;
+    UserRepository userrepository;
     
     @Override
-    public void save(User user) {   
+    public void save(User user) {
+        System.out.println("User from service: "+user);
     userrepository.save(user);
+        System.out.println("From Service: "+userrepository.getAllusers());
 
     }
 
     @Override
     public User findByUsername(String username) {
-   
+   System.out.println("Find by username: "+userrepository.getAllusers());
     return userrepository.findUserByName(username);
             
     }
@@ -49,6 +51,12 @@ public class UserServiceImpl implements UserService{
         }
     else
         return false;  
+    }
+
+    @Override
+    public User findByUsername(String username, UserRepository userRepository) {
+        System.out.println("User Repo: "+userRepository.getAllusers());
+        return userRepository.findUserByName(username);        
     }
  
 }
